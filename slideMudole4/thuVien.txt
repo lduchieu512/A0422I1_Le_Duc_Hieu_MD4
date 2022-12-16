@@ -1,0 +1,60 @@
+Thư viện  
+	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    	implementation group: 'org.springframework', name: 'spring-core', version: '5.2.22.RELEASE'
+    	implementation group: 'org.springframework', name: 'spring-web', version: '5.2.22.RELEASE'
+	implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.2.22.RELEASE'
+    	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+----------------------------------------------------------------------------------------------------------------------------
+AppInitialize(config)
+
+@Configuration
+@EnableWebMvc
+@ComponentScan("com.example.ss1_th_bai_1")	
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[] {AppConfiguration.class};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+    @Override
+    protected Filter[] getServletFilters(){
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+
+        return new Filter[] {characterEncodingFilter} ;
+    }
+}
+------------------------------------------------------------------------------------------------------
+AppConfiguration (config)
+
+
+@Configuration
+@EnableWebMvc
+@ComponentScan("com.example.ss1_th_bai_1")
+public class AppConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+    private ApplicationContext applicationContext;
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    public ViewResolver internalResourceViewResolver(){
+        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+        bean.setPrefix("/WEB-INF/view/");
+        bean.setSuffix(".jsp");
+        return bean;
+    }
+
+
+}
