@@ -26,7 +26,7 @@ public class Blog {
     @Column(name = "discription")
     private String describe;
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
 
