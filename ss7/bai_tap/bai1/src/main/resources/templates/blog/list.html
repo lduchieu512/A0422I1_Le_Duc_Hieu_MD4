@@ -12,44 +12,64 @@
 </head>
 <body>
 <div th:insert="~{header::header-flag}"></div>
+<!--<div th:if="${msg}">-->
+<!--    <h3 th:text="${msg}" class="text-danger"></h3>-->
+<!--    <br>-->
+<!--</div>-->
+<center>
+    <h1 class="text-success">Blog List</h1>
+    <p class="text text-danger" th:text="${msg}"></p>
+</center>
 
-<a href="/blog/create">Create Blog</a>
-<div th:if="${msg}">
-    <h3 th:text="${msg}" class="text-danger"></h3>
-    <br>
-</div>
 
-<table border="1">
-    <tr>
-        <th>STT</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Image</th>
-        <th>Describe</th>
-        <th>Edit</th>
-        <th>View</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="blog, iterStat:${blogList}">
-        <td hidden th:text="${blog.id}"></td>
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${blog.name}"></td>
-        <td  th:text="${blog.category.nameCategory}"></td>
-        <td th:text="${blog.image}"></td>
-        <td th:text="${blog.describe}"></td>
-        <td>
-            <a th:href="@{/blog/edit/{id}(id=${blog.id})}">Edit</a>
-        </td>
-        <td>
-            <a th:href="@{/blog/view/{id}(id=${blog.id})}">view</a>
-        </td>
-        <td>
-            <button>
-                <a th:href="@{/blog/delete/{id}(id=${blog.id})}">Delete</a>
-            </button>
-        </td>
-    </tr>
-</table>
+<center>
+    <div class="row container mx-0 my-2">
+        <div class="card col-md-3" th:each="blog: ${blogList}">
+            <img th:src="${blog.image}" class="card-img-top" width="200px" height="150px" alt="...">
+            <div class="card-body">
+                <h5 class="card-title text text-primary" th:text="'name: '+ ${blog.name}"></h5>
+                <h5 class="card-title text text-success" th:text="'category: '+ ${blog.category.nameCategory}"></h5>
+                <p class="card-text" th:text="'describe: '+ ${blog.describe}"></p>
+                <a th:href="@{/blog/view/{id}(id=${blog.id})}" class="btn btn-primary">View</a>
+                <a th:href="@{/blog/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/blog/edit/{id}(id=${blog.id})}" class="btn btn-warning">Edit</a>
+            </div>
+        </div>
+    </div>
+</center>
+
+
+<!--<table border="1">-->
+<!--    <tr>-->
+<!--        <th>STT</th>-->
+<!--        <th>Name</th>-->
+<!--        <th>Category</th>-->
+<!--        <th>Image</th>-->
+<!--        <th>Describe</th>-->
+<!--        <th>Edit</th>-->
+<!--        <th>View</th>-->
+<!--        <th>Delete</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="blog, iterStat:${blogList}">-->
+<!--        <td hidden th:text="${blog.id}"></td>-->
+<!--        <td th:text="${iterStat.count}"></td>-->
+<!--        <td th:text="${blog.name}"></td>-->
+<!--        <td  th:text="${blog.category.nameCategory}"></td>-->
+<!--        <td th:text="${blog.image}"></td>-->
+<!--        <td th:text="${blog.describe}"></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/blog/edit/{id}(id=${blog.id})}">Edit</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/blog/view/{id}(id=${blog.id})}">view</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <button>-->
+<!--                <a th:href="@{/blog/delete/{id}(id=${blog.id})}">Delete</a>-->
+<!--            </button>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
 
 <div class="container">
     <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-end; justify-content: flex-end; align-items: flex-start;">
