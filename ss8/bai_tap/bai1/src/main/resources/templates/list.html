@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<center> <a th:href="@{/create}">Add New User</a></center>
+<table border="1">
+    <tr>
+        <td>STT</td>
+        <td>Firstname</td>
+        <td>Lastname </td>
+        <td>Phonenumber </td>
+        <td>Age </td>
+        <td>Email  </td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    <tbody th:each="users, iterStat: ${user}">
+    <tr th:object="${users}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${users.fistName}"></td>
+        <td th:text="${users.lastName}"></td>
+        <td th:text="${users.phoneNumber}"></td>
+        <td th:text="${users.age}"></td>
+        <td th:text="${users.email}"></td>
+        <td><a th:href="@{/edit(fistName=*{fistName})}">Edit</a></td>
+        <td><a th:href="@{/delete(fistName=*{fistName})}">Delete</a></td>
+    </tr>
+    </tbody>
+    </tr>
+</table>
+</body>
+</html>
