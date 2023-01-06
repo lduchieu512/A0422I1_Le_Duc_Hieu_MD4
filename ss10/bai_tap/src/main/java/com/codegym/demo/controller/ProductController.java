@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @SessionAttributes("cart")
 public class ProductController {
     @Autowired
