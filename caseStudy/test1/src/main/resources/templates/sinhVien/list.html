@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="content">
+    <div class="container-fluid">
+        <!-- Vertical Layout -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Student list
+                        </h2>
+                    </div>
+                    <div class="body table-responsive">
+                        <a th:href="@{/create}" class="btn btn-primary btn-custom">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add new student
+                        </a>
+                        <table class="table table-striped" id="dataTable-listStudent">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>CMND</th>
+                                <th>Ho va ten</th>
+                                <th>Email</th>
+                                <th>SDT</th>
+                                <th>Dia chi</th>
+                                <th>Truong</th>
+                                <th>Nganh</th>
+                                <th>he Tot nghiep</th>
+                                <th>ngay Tot nghiep</th>
+                                <th>Loai tot nghiep</th>
+                                <th>Ngay vao Cty</th>
+                                <th>Ma Nganh</th>
+                                <th>Ten Cong Viec</th>
+                                <th>Ten Cty</th>
+                                <th>Dia chi Cty</th>
+                                <th>Thoi gian lam viec</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                            <tbody th:each="st, iterStat: ${sinhvienList}">
+                            <td>
+                                <a th:href="@{/edit(id=*{id})}">View</a>-->
+                            </td>
+                            <td>
+                                <a th:href="@{/delete/{id}(id=*{id})}">Delete</a>-->
+                            </td>
+                                <td th:text="*{SoCMND}"></td>
+                                <td th:text="*{name}"></td>
+                                <td th:text="*{email}"></td>
+                                <td th:text="*{sdt}"></td>
+                                <td th:text="*{diachi}"></td>
+                            </tbody>
+
+                                <tbody th:each="st, iterStat: ${listNganh}">
+                                <td  th:text="*{maNganh}"></td>
+                                <td th:text="*{tenNganh}"></td>
+                                <td th:text="*{loaiNganh}"></td>
+                                                              </tbody>
+
+                                <tbody th:each="st, iterStat: ${listTruong}">
+                                <td th:text="*{idTruong}"></td>
+                                <td th:text="*{tenTruong}"></td>
+                                <td th:text="*{sdt}"></td>
+                                <td th:text="*{diachi}"></td>
+
+                                </tbody>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

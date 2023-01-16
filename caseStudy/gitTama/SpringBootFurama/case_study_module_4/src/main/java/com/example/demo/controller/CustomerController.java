@@ -61,7 +61,7 @@ public class CustomerController {
     public String createTargetCustomer(@Valid @ModelAttribute("customer") CustomerDTO customerDTO,
                                        BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            model.addAttribute("typeList", typeService.findAll()    );
+            model.addAttribute("typeList", typeService.findAll());
             return "customer/form";
         }
 
