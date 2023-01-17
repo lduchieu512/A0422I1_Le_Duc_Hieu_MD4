@@ -13,7 +13,7 @@
         <strong th:text="${message}" class="text-success"></strong>
     </p>
     <input type="text" id="popup" hidden>
-    <button type="button" class="btn btn-primary" data-bs-toggle="model" data-bs-target="#createModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
         Create Blog
     </button>
     <div>
@@ -37,9 +37,9 @@
                 <td th:text="*{id}"></td>
                 <td th:text="*{createTime}"></td>
                 <td th:text="*{author}"></td>
-<!--                <td>-->
-<!--                    <img th:src="@{'/image/'+ *{image}}" width="100px" height="150px">-->
-<!--                </td>-->
+                <td>
+                    <img th:src="@{'/image/'+ *{img}}" width="100px" height="150px">
+                </td>
                 <td>
                     <a class="btn btn-success" th:href="@{/blog/list/detail/{id}(id=${blog.id})}">Detail</a>
                     <a class="btn btn-primary" th:href="@{/blog/edit/__${blog.id}__}">Edit</a>
@@ -54,65 +54,68 @@
     <div class="row">
         <button class="btn btn-success" onclick="loadPage()">Tải thêm</button>
     </div>
-<!--    <div>-->
-<!--        <a th:href="@{'/blog/list'(page=${blogList.number -1})}" th:if="${blogList.hasPrevious()}">-->
-<!--            <button type="button" class="btn btn-outline-warning">Previous</button>-->
-<!--        </a>-->
-<!--        <span th:text="${blogList.number +1}"></span>/<span th:text="${blogList.totalPages}"></span>-->
-<!--        <a th:href="@{'/blog/list'(page=${blogList.number +1})}" th:if="${blogList.hasNext()}">-->
-<!--            <button type="button" class="btn btn-outline-warning">Next</button>-->
-<!--        </a>-->
-<!--    </div>-->
+    <div>
+        <a th:href="@{'/blog/list'(page=${blogList.number -1})}" th:if="${blogList.hasPrevious()}">
+            <button type="button" class="btn btn-outline-warning">Previous</button>
+        </a>
+        <span th:text="${blogList.number +1}"></span>/<span th:text="${blogList.totalPages}"></span>
+        <a th:href="@{'/blog/list'(page=${blogList.number +1})}" th:if="${blogList.hasNext()}">
+            <button type="button" class="btn btn-outline-warning">Next</button>
+        </a>
+    </div>
 </center>
+
 
 <div id="createModal" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <form method="post" action="/blog/create" th:object="${blog}" enctype="multipart/form-data">
-              <div  class="modal-header">
-                  <h4 class="modal-title"> Create new Blog</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                          onclick="this.form.reset()"> </button>
-              </div>
-              <div class="modal-body">
-                  <div class="row">
-                      <div class="col-6 form-group mb-2">
-                          <label>Author</label>
-                          <input type="number" name="id" th:field="*{id}" hidden>
-                          <input type="text" class="form-control mt-2" name="author"
-                                 th:field="*{author}" required>
-                      </div>
-                      <div class="col-6 form-group mb-2">
-                         <label>Category</label><br>
-                        <select th:field="*{category_id}">
-                          <option th:each="cate:${category}" th:text="${cate.name}"
-                                  th:value="${cate.category_id}">1</option>
-                        </select>
-                      </div>
-                  </div>
+            <form method="post" action="/blog/create" th:object="${blog}" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create new blog</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="this.form.reset()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 form-group mb-2">
+                            <label>Author</label>
+                            <input type="number" name="id" th:field="*{id}" hidden/>
+                            <input type="text" class="form-control mt-2" name="author" th:field="*{author}"
+                                   required>
+                        </div>
+                        <div class="col-6 form-group mb-2">
+                            <label>Category</label><br>
+                            <select th:field="*{category_id}">
+                                <option th:each="cate:${category}" th:text="${cate.name}"
+                                        th:value="${cate.category_id}">1
+                                </option>
+                            </select>
+                        </div>
+                    </div>
 
-                  <div class="row">
-                      <div class="col-12 form-group mb-2">
-                          <label>Image</label>
-                          <input type="file" class="form-control mt-2" name="image" th:field="*{image}"
-                                 th:alt="*{image}" accept="image/png , image/jpg  , image/jpeg" required>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-12 form-group mb-2">
-                          <label>Body</label>
-                          <textarea type="text" class="form-control mt-2" name="body" th:field="*{body}"
-                                    required style="height: 200px"></textarea>
-                      </div>
-                  </div>
+                    <div class="row">
+                        <div class="col-12 form-group mb-2">
+                            <label>image</label>
+                            <input type="file" class="form-control mt-2" name="image" th:field="*{img}"
+                                   th:alt="*{img}" accept="image/png, image/jpg,image/jpeg" required>
+                        </div>
+                    </div>
 
-                  <div class="modal-footer">
-                      <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close"
-                             onclick="this.form.reset()">
-                      <input type="submit" class="btn btn-primary" value="Submit">
-                  </div>
-              </div>
-          </form>
+                    <div class="row">
+                        <div class="col-12 form-group mb-2">
+                            <label>Body</label>
+                            <textarea type="text" class="form-control mt-2" name="body" th:field="*{body}"
+                                      required style="height: 200px"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close"
+                               onclick="this.form.reset()">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -127,7 +130,7 @@
                     <td>${data.createTime}</td>
                     <td>${data.author}</td>
                     <td>
-                        <img src="/image/${data.image}" width="100px" height="150px">
+                        <img src="/image/${data.img}" width="100px" height="150px">
                     </td>
                     <td>
                         <a class="btn btn-success" href="/blog/list/detail/{id}(id=${data.id})">Detail</a>
@@ -195,6 +198,7 @@
 </script>
 
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

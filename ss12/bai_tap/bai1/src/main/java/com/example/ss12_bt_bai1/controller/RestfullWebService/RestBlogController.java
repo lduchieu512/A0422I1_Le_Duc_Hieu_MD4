@@ -5,12 +5,11 @@ import com.example.ss12_bt_bai1.model.Category;
 import com.example.ss12_bt_bai1.service.IBlogService;
 import com.example.ss12_bt_bai1.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +48,29 @@ public class RestBlogController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(blog.get(),HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Blog> createBlogs(@RequestBody Blog blog){
+        blogService.save(blog);
+        return new ResponseEntity<>(blog,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Iterable<Blog>> showBlogs(@PageableDefault(value = 2) Pageable pageable){
+        return new ResponseEntity<>(blogService.findAll(pageable),HttpStatus.OK);
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<Iterable<Blog>> searchBlogs(@RequestParam("key") String key,@PageableDefault(value = 2)Pageable pageable){
+        if (key.isEmpty()||key==""){
+            return new ResponseEntity<>(blogService.findAll(pageable.withPage(0)).getContent(),HttpStatus.OK);
+        }
+        List<Blog> blogs = blogService.findAllByKey("%"+ key+"%");
+        if (blogs.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(blogs,HttpStatus.OK);
     }
 
 

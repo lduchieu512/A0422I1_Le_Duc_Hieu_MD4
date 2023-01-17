@@ -6,19 +6,10 @@ public class BlogForm {
     private  String createTime;
     private String author;
     private Integer category_id;
-    private MultipartFile image;
+    private MultipartFile img;
     private String body;
 
     public BlogForm() {
-    }
-
-    public BlogForm(Integer id, String createTime, String author, Integer category_id, MultipartFile image, String body) {
-        this.id = id;
-        this.createTime = createTime;
-        this.author = author;
-        this.category_id = category_id;
-        this.image = image;
-        this.body = body;
     }
 
     public Integer getId() {
@@ -53,12 +44,12 @@ public class BlogForm {
         this.category_id = category_id;
     }
 
-    public MultipartFile getImage() {
-        return image;
+    public MultipartFile getImg() {
+        return img;
     }
 
-    public void setImage(MultipartFile image) {
-        this.image = image;
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 
     public String getBody() {
@@ -66,6 +57,15 @@ public class BlogForm {
     }
 
     public void setBody(String body) {
+        this.body = body;
+    }
+
+    public BlogForm(Integer id, String createTime, String author, Integer category_id, MultipartFile img, String body) {
+        this.id = id;
+        this.createTime = createTime;
+        this.author = author;
+        this.category_id = category_id;
+        this.img = img;
         this.body = body;
     }
 }

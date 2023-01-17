@@ -39,7 +39,7 @@ public class BlogController {
         ModelAndView modelAndView = new ModelAndView(("blog/list"));
         modelAndView.addObject("blog",new BlogForm());
         modelAndView.addObject("category",categoryService.findAll());
-        modelAndView.addObject("blogList",blogService.findAll());
+        modelAndView.addObject("blogList",blogService.findAll(pageable));
         return  modelAndView;
     }
     @PostMapping("/list")
@@ -58,7 +58,7 @@ public class BlogController {
     }
     @PostMapping("/create")
     public String createBlog(@ModelAttribute BlogForm blogForm, RedirectAttributes redirectAttributes) {
-        MultipartFile file = blogForm.getImage();
+        MultipartFile file = blogForm.getImg();
         String fileName = file.getOriginalFilename();
         try {
             FileCopyUtils.copy(file.getBytes(), new File(uploadFolder + fileName));
@@ -77,6 +77,28 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("message", "Create blog: " + " OK!");
         return "redirect:/blog/list";
     }
+    @GetMapping("/delete")
+    public String deleteBlog(@RequestParam("id")Integer id,RedirectAttributes redirectAttributes)throws IOException{
+        Blog blog = blogService.findById(id).get();
+        if (blog != null){
+            blogService.remove(id);
+        }
+        redirectAttributes.addFlashAttribute("message","Delete blog: " +"OK!");
+        return "redirect:/blog/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditBlog(@PathVariable("id") Integer id,RedirectAttributes redirectAttributes,@PageableDefault(value = 2) Pageable pageable){
+        ModelAndView modelAndView = new ModelAndView("blog");
+        modelAndView.addObject("blog",blogService.findById(id).get());
+        modelAndView.addObject("popup",2);
+        modelAndView.addObject("BlogList",blogService.findAll(pageable));
+        redirectAttributes.addFlashAttribute("message","Edit blog. Please");
+        return modelAndView;
+    }
+
+
+
 
 
 
