@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class TypeCustomerService implements ITypeService<CustomerType> {
     @Autowired
-    ITypeCustomerRepository repository;
+   private ITypeCustomerRepository repository;
 
     @Override
     public List<CustomerType> findAll() {

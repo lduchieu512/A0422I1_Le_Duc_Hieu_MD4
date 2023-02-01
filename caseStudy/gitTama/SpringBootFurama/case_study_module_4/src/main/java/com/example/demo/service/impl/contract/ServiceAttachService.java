@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ServiceAttachService implements IServiceAttachService {
 
     @Autowired
-    IAttachServiceRepository repository;
+   private IAttachServiceRepository repository;
 
     @Override
     public Optional<AttachService> findById(Integer id) {

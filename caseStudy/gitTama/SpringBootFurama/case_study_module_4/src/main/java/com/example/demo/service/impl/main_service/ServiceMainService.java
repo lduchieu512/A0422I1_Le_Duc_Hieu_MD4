@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class ServiceMainService implements IMainService {
     @Autowired
-    IMainServiceRepository repository;
+    private IMainServiceRepository repository;
 
     @Override
     public Page<MainService> findAllByName(String keyword, Pageable pageable) {

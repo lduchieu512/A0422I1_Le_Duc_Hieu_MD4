@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class ContractService implements IContractService {
     @Autowired
-    IContractRepository repository;
+    private IContractRepository repository;
 
     @Override
     public Page<Contract> findAllByName(String keyword, Pageable pageable) {

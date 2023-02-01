@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class CustomerService implements ICustomerService {
     @Autowired
-    ICustomerRepository customerRepository;
+   private ICustomerRepository customerRepository;
 
     @Override
     public Page<Customer> findAllByName(String name_search, Pageable pageable) {

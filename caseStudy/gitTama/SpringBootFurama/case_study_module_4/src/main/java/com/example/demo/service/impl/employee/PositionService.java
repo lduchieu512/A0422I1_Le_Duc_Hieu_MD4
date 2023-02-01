@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class PositionService implements ITypeService<Position> {
     @Autowired
-    IPositionRepository repository;
+    private IPositionRepository repository;
 
     @Override
     public List<Position> findAll() {

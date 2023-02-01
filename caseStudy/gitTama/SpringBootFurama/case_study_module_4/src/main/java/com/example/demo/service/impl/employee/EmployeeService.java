@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class EmployeeService implements IEmployeeService {
     @Autowired
-    IEmployeeRepository repository;
+    private IEmployeeRepository repository;
 
     @Override
     public Page<Employee> findAllByName(String keyword, Pageable pageable) {

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContractDetailsService implements IContractDetailsService {
     @Autowired
-    IContractDetailsRepository repository;
+    private IContractDetailsRepository repository;
 
     @Override
     public ContractDetails save(ContractDetails details) {

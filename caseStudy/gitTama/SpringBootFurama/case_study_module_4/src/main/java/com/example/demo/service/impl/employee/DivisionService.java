@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class DivisionService implements ITypeService<Division> {
     @Autowired
-    IDivisionRepository repository;
+    private IDivisionRepository repository;
 
     @Override
     public List<Division> findAll() {

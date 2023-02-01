@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ServiceRentService implements ITypeService<RentType> {
     @Autowired
-    IRentRepository rentRepository;
+    private IRentRepository rentRepository;
 
     @Override
     public List<RentType> findAll() {

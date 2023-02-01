@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EducationService implements ITypeService<EducationDegree> {
     @Autowired
-    IEducationRepository repository;
+    private IEducationRepository repository;
 
     @Override
     public List<EducationDegree> findAll() {

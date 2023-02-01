@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class AccountService implements IEmployeeAccountService {
     @Autowired
-    IAccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     @Override
     public Optional<EmployeeAccount> findByUserNameAndPassword(String username, String password) {
