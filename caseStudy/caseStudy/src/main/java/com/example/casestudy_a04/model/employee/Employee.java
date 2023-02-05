@@ -1,13 +1,16 @@
 package com.example.casestudy_a04.model.employee;
 
+import com.example.casestudy_a04.model.contract.Contract;
 import com.example.casestudy_a04.model.employee.roles.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -20,39 +23,52 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
 
-    @Column(nullable = false,length = 45)
+    @NotEmpty
+    @Column(nullable = false, length = 45)
     private String employeeName;
 
+    @NotNull
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date employeeBirthday;
 
-    @Column(nullable = false,length = 45)
-    private String employeeCard;
+    @Column(nullable = false, length = 45)
+    @Pattern(regexp = "[0-9]{9}|[0-9]{12}", message = "{idCard}")
+    private String employeeIdCard;
 
     @Column(nullable = false)
+    @Min(value = 0, message = "Lương phải lớn hơn 0")
     private Double employeeSalary;
 
-    @Column(nullable = false,length = 45)
+    @Column(nullable = false, length = 45)
+    @Pattern(regexp = "(0[9][0-9]{8})|((84)+[9][0-9]{8})",message = "{phone}")
     private String employeePhone;
 
-    @Column(nullable = true,length = 45)
+    @Email( message = "{email}")
+    @Column(length = 45)
     private String employeeEmail;
-    @Column(nullable = true,length = 45)
+
+    @NotEmpty
+    @Column(length = 45)
     private String employeeAddress;
 
     @ManyToOne
-    @JoinColumn(name = "position_id",nullable = false)
-    private Position position;
+    @JoinColumn(name = "positionid", nullable = false)
+    private Position positionId;
 
     @ManyToOne
-    @JoinColumn(name = "division_id",nullable = false)
+    @JoinColumn(name = "educationdegreeid", nullable = false)
+    private EducationDegree educationDegreeId;
+
+    @ManyToOne
+    @JoinColumn(name = "divisionid", nullable = false)
     private Division divisionId;
 
     @ManyToOne
-    @JoinColumn(name = "education_degree_id",nullable = false)
-    private EducationDegree educationDegree;
-
-    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
     private User username;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "employeeId", cascade = CascadeType.REMOVE)
+    private List<Contract> contracts;
 }

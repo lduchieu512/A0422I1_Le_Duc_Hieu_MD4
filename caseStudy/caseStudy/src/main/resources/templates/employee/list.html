@@ -12,6 +12,7 @@
 <!--+++++++++++++++++++++header+++++++++++++++++++++-->
 <div th:replace="~{layout/header.html}"></div>
 
+<!--+++++++++++++++++++++navbar top+++++++++++++++++++++-->
 <div class="mt-2 sticky-top" style="background-color: #046056">
     <nav class="navbar navbar-light">
         <div class="container-fluid">
@@ -39,8 +40,8 @@
 <!--+++++++++++++++++++++content+++++++++++++++++++++-->
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="~{layout/sidebar.html}"></div>
-        <div class="col-md-10">
+<!--        <div th:replace="~{layout/sidebar.html}"></div>-->
+        <div>
             <br>
             <center>
                 <h1 class="font-text-footer">Employee List</h1>
@@ -64,6 +65,7 @@
                     <th>Position</th>
                     <th>Education Degree</th>
                     <th>Division</th>
+                    <th></th>
                     <th>
                         <a th:href="@{/employee/create}">
                             <button class="btn btn-outline-success w-100">
@@ -190,8 +192,6 @@
         </form>
     </div>
 </div>
-
-
 
 <!--+++++++++++++++++++++footer+++++++++++++++++++++-->
 <div th:replace="~{layout/footer.html}"></div>

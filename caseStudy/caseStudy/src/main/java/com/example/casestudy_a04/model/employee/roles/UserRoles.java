@@ -16,11 +16,11 @@ public class UserRoles {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "role_id",nullable = false)
-    private Role role;
+    @JoinColumn(nullable = false)
+    private Role roleId;
 
     @ManyToOne
-    @JoinColumn(name = "username",nullable = false)
+    @JoinColumn(name = "username")
     private User account;
 
 }

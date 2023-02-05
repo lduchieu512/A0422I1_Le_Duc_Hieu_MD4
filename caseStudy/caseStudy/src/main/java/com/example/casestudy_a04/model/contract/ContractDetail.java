@@ -16,14 +16,14 @@ import javax.persistence.*;
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer contract_detail_id;
+    private Integer contractDetailId;
     @ManyToOne
     @JoinColumn(name = "attach_service_id",nullable = false)
-    private AttachService attachService;
+    private AttachService attachServiceId;
 
     @ManyToOne
     @JoinColumn(name = "contract_id",nullable = false)
-    private Contract contract;
+    private Contract contractId;
 
 
     @Column(nullable = false)

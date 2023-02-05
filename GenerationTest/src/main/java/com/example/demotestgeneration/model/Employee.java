@@ -20,11 +20,17 @@ public class Employee {
     @GenericGenerator(name = "prod-generator",
             parameters = @Parameter(name = "prefix", value = "prod"),
             strategy = "com.example.demotestgeneration.model.MyGenerator")
-    private int id;private String name;
-    private String dateOfBirth;
+    @Column(length = 45)
+    private String id;
 
-    public Employee(String name, String dateOfBirth) {
+//    @Column(length = 45)
+    private String name;
+
+//    @Column(length = 45)
+    private String birth;
+
+    public Employee(String name, String birth) {
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
+        this.birth = birth;
     }
 }

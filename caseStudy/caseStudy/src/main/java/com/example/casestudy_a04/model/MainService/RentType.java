@@ -16,12 +16,12 @@ import javax.persistence.*;
 public class RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer rent_type_id;
+    private Integer rentTypeId;
 
     @Column(length = 45)
-    private String rent_type_name;
+    private String rentTypeName;
 
-    private Double rent_type_cost;
+    private Double rentTypeCost;
 
 
 

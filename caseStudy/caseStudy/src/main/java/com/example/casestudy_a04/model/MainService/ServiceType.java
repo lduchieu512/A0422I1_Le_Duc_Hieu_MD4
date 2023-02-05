@@ -16,9 +16,9 @@ import javax.persistence.*;
 public class ServiceType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer service_type_id;
+    private Integer serviceTypeId;
     @Column(length = 45,nullable = true)
-    private String service_type_name;
+    private String serviceTypeName;
 
 
 

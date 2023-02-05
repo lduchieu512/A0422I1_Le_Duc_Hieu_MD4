@@ -16,8 +16,8 @@ import javax.persistence.*;
 public class EducationDegree {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer education_degree_id;
+    private Integer educationDegreeId;
     @Column(nullable = true, length = 45)
-    private String education_degree_name;
+    private String educationDegreeName;
 
 }

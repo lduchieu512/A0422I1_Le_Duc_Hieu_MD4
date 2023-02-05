@@ -16,15 +16,15 @@ import javax.persistence.*;
 public class AttachService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer attach_service_id;
+    private Integer attachServiceId;
     @Column(nullable = false,length = 45)
-    private String attach_service_name;
+    private String attachServiceName;
     @Column(nullable = false)
-    private Double attach_service_cost;
-    @Column(nullable = false)
-    private Integer attach_service_unit;
+    private Double attachServiceCost;
+    @Column(nullable = false,length = 45)
+    private String attachServiceUnit;
     @Column(nullable = true,length = 45)
-    private String attach_service_status;
+    private String attachServiceStatus;
 
 
 

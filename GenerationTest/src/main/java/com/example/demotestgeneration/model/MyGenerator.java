@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.stream.Stream;
 
 public class MyGenerator implements IdentifierGenerator {
-    private String prefix ="EMP";
+    private String prefix ;
 
 
     @Override
@@ -29,12 +29,24 @@ public class MyGenerator implements IdentifierGenerator {
                 session.getEntityPersister(obj.getClass().getName(), obj)
                         .getIdentifierPropertyName(),
                 obj.getClass().getSimpleName());
+
         Stream<String> ids = session.createQuery(query).stream();
+
         Long max = ids.map(o -> o.replace(prefix + "-", ""))
                 .mapToLong(Long::parseLong)
                 .max()
-                .orElse(0);
+                .orElse(0L);
+
         return prefix + "-" + (max + 1);
+
+
+
+
+
+
+
+
+
 
 
 //        String query = "SELECT e.id FROM Employee e";

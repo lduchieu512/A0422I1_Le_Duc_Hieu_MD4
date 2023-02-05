@@ -56,7 +56,8 @@ public class ContractController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("contract") ContractDTO contract, BindingResult result, Model model, RedirectAttributes attributes) {
+    public String update(@Valid @ModelAttribute("contract") ContractDTO contract,
+                         BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             transferDataAddOnContract(model);
                 return "contract/form";
